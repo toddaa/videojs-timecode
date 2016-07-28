@@ -73,19 +73,24 @@ function MillToTimecode(seconds, TimeFormat) {
     }
 
     // Check if we need to show hours
-    h = (h < 10) ? ("0" + h) + ":" : h + ":";
+    h = (h < 10) ? ("0" + h) : h;
 
     // If hours are showing, we may need to add a leading zero.
     // Always show at least one digit of minutes.
-    m = (((h) && m < 10) ? "0" + m : m) + ":";
+    m = (((h) && m < 10) ? "0" + m : m);
 
     // Check if leading zero is need for seconds
-    s = ((s < 10) ? "0" + s : s) + ":";
+    s = ((s < 10) ? "0" + s : s);
 
     f = (f < 10) ? "0" + f : f;
 
     if (TimeFormat == 'STANDARD')
         f = (f < 100) ? "0" + f : f;
-
-    return h + m + s + f;
+        
+    if (TimeFormat == 'STANDARD-NO-MS'){
+      return h + ":" + m + ":" + s;
+    } else {
+      return h + ":" + m + ":" + s + ":" + f;
+    }
+    
 }
